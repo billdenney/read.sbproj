@@ -3,6 +3,7 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/billdenney/read.sbproj/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/billdenney/read.sbproj/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/billdenney/read.sbproj/graph/badge.svg)](https://app.codecov.io/gh/billdenney/read.sbproj)
+[![CodeFactor](https://www.codefactor.io/repository/github/billdenney/read.sbproj/badge)](https://www.codefactor.io/repository/github/billdenney/read.sbproj)
 <!-- badges: end -->
 
 The goal of read.sbproj is to allow you to read Matlab SimBiology projects into

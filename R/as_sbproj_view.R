@@ -26,7 +26,6 @@ set_nodeclass <- function(x) {
     } else if (!is.na(node_method)) {
       class(x) <- c(paste0("xml_", xml2::xml_name(x), "_meth", node_method), setdiff(class(x), "xml_document"))
     } else {
-      browser()
       stop("Please report a bug: <void> tag without property or method attribute") # nocov
     }
   } else {
@@ -286,10 +285,8 @@ as_sbproj_view.xml_object_com.mathworks.bde.elements.lines.terminator.ArrowHead 
 #' @export
 as_sbproj_view.xml_object <- function(x, ...) {
   assert_xml_children(x, len = 0)
-  attrs <- xml2::xml_attrs(x)
-  stopifnot(length(attrs) == 1)
-  stopifnot("idref" %in% names(attrs))
-  ret <- attrs[["idref"]]
+  assert_xml_attr_names(x, permutation.of = "idref")
+  ret <- xml2::xml_attr(x, attr = "idref")
   class(ret) <- c("sbproj_view_objectref", "sbproj_view")
   ret
 }
@@ -312,8 +309,7 @@ as_sbproj_view.xml_void_propstartConnection <- function(x, ...) {
 
 #' @export
 as_sbproj_view.default <- function(x, ...) {
-  browser()
-  stop("No as_sbproj_view() method for ", paste(class(x), collapse = ", "))
+  stop("No as_sbproj_view() method for ", paste(class(x), collapse = ", ")) # nocov
 }
 
 # Helper functions ----
@@ -373,8 +369,6 @@ get_class_from_list <- function(x, what, what_not = NULL, len = NULL) {
   }
   ret <- x[mask]
   if (!is.null(len) && !(length(ret) %in% len)) {
-    browser()
-    stop()
     stop("Incorrect number of elements, ", length(ret) , " != ", len)
   }
   if (all(len %in% c(0, 1)) && length(ret) == 1) {
